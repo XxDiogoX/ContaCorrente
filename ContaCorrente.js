@@ -1,9 +1,35 @@
+import {Cliente} from "./Cliente.js"
 export class ContaCorrente{
+    static numeroDeConta = 0;
     agencia;
     numeroConta;
-    cliente;
 
-    #_saldo // Atributo privado
+    #_cliente;// Atributo privado
+    #_saldo = 0; // Atributo privado
+
+
+    constructor(numeroAgencia,nConta,cliente){
+        this.agencia = numeroAgencia;
+        this.numeroConta = nConta;
+        this.#_cliente = cliente;
+        ContaCorrente.numeroDeConta += 1;
+
+    }
+
+
+    set clienteenviado(clienteRecebido){
+        if(clienteRecebido instanceof Cliente){
+            this.#_cliente = clienteRecebido;
+        }else{
+            console.log("O parâmetro não é do tipo Cliente!!");
+        }
+    }
+
+
+    get cliente(){
+        return this.#_cliente;
+    }
+
 
     set saldo(valorSaldo){
         this.#_saldo = valorSaldo;
